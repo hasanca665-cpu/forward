@@ -4,7 +4,7 @@ import asyncio, json, re, os
 import requests
 import threading
 import time
-import random  # Added missing import
+import random
 
 # === CONFIG ===
 api_id = 24742957
@@ -113,7 +113,7 @@ async def off_country(event):
         save_countries(countries)
         await event.reply(f"🚫 {name} forwarding **OFF** করা হলো।")
     else:
-        await event.reply("❌ Country list এ এই নামটা নেই।")
+        await event.reply("❌ Country list এ এই নামটা নেই。")
 
 # === Message Handler ===
 @client.on(events.NewMessage(chats=SOURCE))
@@ -170,6 +170,8 @@ async def main():
     print("⏰ 24/7 Keep-alive system: ACTIVE")
     print("🚀 Bot is now running superfast!\n")
     
+    # Keep the bot running
+    print("🔄 Bot is running in background worker mode...")
     await client.run_until_disconnected()
 
 if __name__ == "__main__":
