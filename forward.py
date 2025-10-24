@@ -5,6 +5,18 @@ import requests
 import threading
 import time
 import random
+from flask import Flask
+
+# === Flask App for Web Service ===
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "🤖 Telegram Forward Bot is Running!"
+
+@app.route('/health')
+def health():
+    return "✅ Bot is healthy and running!"
 
 # === CONFIG ===
 api_id = 24742957
@@ -14,7 +26,7 @@ TARGET = "cucuucugrggfd"
 SESSION_FILE = 'session.json'
 COUNTRY_FILE = 'countries.json'
 
-# Keep-alive configuration - আপনার actual URL দিয়ে replace করুন
+# Keep-alive configuration
 KEEP_ALIVE_URL = "https://forward.onrender.com"  # CHANGE THIS
 
 client = TelegramClient(SESSION_FILE, api_id, api_hash)
@@ -158,21 +170,31 @@ async def message_handler(event):
     except Exception as e:
         print(f"❌ Forward failed ({country}): {e}")
 
-# === Main ===
-async def main():
-    # Start keep-alive system
-    start_keep_alive()
-    
+# === Telegram Bot Startup ===
+async def start_telegram_bot():
     await client.start()
     me = await client.get_me()
     print(f"🤖 Logged in as @{me.username}")
     print("🎯 Forwarding bot active and perfect.")
     print("⏰ 24/7 Keep-alive system: ACTIVE")
     print("🚀 Bot is now running superfast!\n")
-    
-    # Keep the bot running
-    print("🔄 Bot is running in background worker mode...")
     await client.run_until_disconnected()
 
+# === Main Function ===
+def main():
+    # Start keep-alive system
+    start_keep_alive()
+    
+    # Start Telegram bot in a separate thread
+    telegram_thread = threading.Thread(
+        target=lambda: asyncio.run(start_telegram_bot()),
+        daemon=True
+    )
+    telegram_thread.start()
+    
+    # Start Flask web server
+    print("🌐 Starting Flask web server on port 10000...")
+    app.run(host='0.0.0.0', port=10000, debug=False)
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
