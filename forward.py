@@ -15,7 +15,7 @@ SESSION_FILE = 'session.json'
 COUNTRY_FILE = 'countries.json'
 
 # Keep-alive configuration - আপনার actual URL দিয়ে replace করুন
-KEEP_ALIVE_URL = "https://your-app-name.onrender.com"  # CHANGE THIS
+KEEP_ALIVE_URL = "https://forward.onrender.com"  # CHANGE THIS
 
 client = TelegramClient(SESSION_FILE, api_id, api_hash)
 
