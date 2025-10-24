@@ -4,6 +4,7 @@ import asyncio, json, re, os
 import requests
 import threading
 import time
+import random  # Added missing import
 
 # === CONFIG ===
 api_id = 24742957
@@ -13,8 +14,8 @@ TARGET = "cucuucugrggfd"
 SESSION_FILE = 'session.json'
 COUNTRY_FILE = 'countries.json'
 
-# Keep-alive configuration
-KEEP_ALIVE_URL = "https://forward.onrender.com"
+# Keep-alive configuration - আপনার actual URL দিয়ে replace করুন
+KEEP_ALIVE_URL = "https://your-app-name.onrender.com"  # CHANGE THIS
 
 client = TelegramClient(SESSION_FILE, api_id, api_hash)
 
