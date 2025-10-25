@@ -19,8 +19,8 @@ def health():
     return "✅ Bot is healthy and running!"
 
 # === CONFIG ===
-api_id = 24742957
-api_hash = "40d421e05a414534910ebc0998f97c10"
+api_id = 2474298
+api_hash = ""
 SOURCE = 2818830065
 TARGET = "cucuucugrggfd"
 SESSION_FILE = 'session.json'
